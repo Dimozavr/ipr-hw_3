@@ -1,0 +1,16 @@
+dimozavr@dimozavrhuawei:~/CLionProjects/ipr-hw3/app$ curl -X POST http://localhost:8080/increment
+{"greeting": "Hello!", "count": 1, "hostname": "9c29a462b443", "storage": "sqlite"}
+dimozavr@dimozavrhuawei:~/CLionProjects/ipr-hw3/app$ curl http://localhost:8080/
+{"greeting": "Hello!", "count": 1, "hostname": "9c29a462b443", "storage": "sqlite"}
+dimozavr@dimozavrhuawei:~/CLionProjects/ipr-hw3/app$ curl -X POST http://localhost:8080/increment
+{"greeting": "Hello!", "count": 2, "hostname": "9c29a462b443", "storage": "sqlite"}
+dimozavr@dimozavrhuawei:~/CLionProjects/ipr-hw3/app$ curl http://localhost:8080/
+{"greeting": "Hello!", "count": 2, "hostname": "9c29a462b443", "storage": "sqlite"}
+dimozavr@dimozavrhuawei:~/CLionProjects/ipr-hw3/app$ docker logs hw-container
+2026-11-17 11:26:56,944 listening port=8000 storage=sqlite
+2026-11-17 11:29:30,739 http 172.17.0.1 "POST /increment HTTP/1.1" 200 -
+2026-11-17 11:30:01,006 http 172.17.0.1 "GET / HTTP/1.1" 200 -
+2026-11-17 11:30:29,020 http 172.17.0.1 "GET / HTTP/1.1" 200 -
+2026-11-17 11:30:32,413 http 172.17.0.1 "POST /increment HTTP/1.1" 200 -
+2026-11-17 11:30:35,953 http 172.17.0.1 "GET / HTTP/1.1" 200 -
+2026-11-17 11:30:38,657 http 172.17.0.1 "GET / HTTP/1.1" 200 -
