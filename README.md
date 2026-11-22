@@ -21,3 +21,5 @@
 Остановка: `docker compose down` (данные остаются).\
 Redis: `docker compose stop redis` / `docker compose start redis`.\
 Использовать `docker compose down -v`, если нужно удалить данные.
+
+## Все логи лежат в /answers
