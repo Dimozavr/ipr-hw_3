@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    ports:
+      - "${PORT}:8000"
+    environment:
+      PORT: "8000"
+      GREETING: "${GREETING}"
+      DATA_FILE: "/data/counter.db"
+    volumes:
+      - data_counter:/data
+volumes:
+  data_counter:

@@ -1,0 +1,28 @@
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl http://localhost:8080/
+{"greeting": "Hello docker compose!", "count": 0, "hostname": "8caf9a55ca55", "storage": "sqlite"}dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl -X POST http://localhost:8080/increment
+{"greeting": "Hello docker compose!", "count": 1, "hostname": "8caf9a55ca55", "storage": "sqlite"}dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl -X POST http://localhost:8080/increment
+{"greeting": "Hello docker compose!", "count": 2, "hostname": "8caf9a55ca55", "storage": "sqlite"}dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl http://localhost:8080/
+{"greeting": "Hello docker compose!", "count": 2, "hostname": "8caf9a55ca55", "storage": "sqlite"}dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker compose down
+[+] down 2/2
+ ✔ Container app-app-1 Removed                                                                                                                                                                                                                                                                                  3.3s
+ ✔ Network app_default Removed                                                                                                                                                                                                                                                                                  0.1s
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker compose up -d
+[+] up 2/2
+ ✔ Network app_default Created                                                                                                                                                                                                                                                                                  0.0s
+ ✔ Container app-app-1 Started                                                                                                                                                                                                                                                                                  0.3s
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl http://localhost:8080/
+{"greeting": "Hello docker compose!", "count": 2, "hostname": "6f1db91093d1", "storage": "sqlite"}dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker compose down -v
+[+] down 3/3
+ ✔ Container app-app-1     Removed                                                                                                                                                                                                                                                                              3.3s
+ ✔ Volume app_data_counter Removed                                                                                                                                                                                                                                                                              0.0s
+ ✔ Network app_default     Removed                                                                                                                                                                                                                                                                              0.1s
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker compose up -d
+[+] up 3/3
+ ✔ Volume app_data_counter Created                                                                                                                                                                                                                                                                              0.0s
+ ✔ Network app_default     Created                                                                                                                                                                                                                                                                              0.0s
+ ✔ Container app-app-1     Started                                                                                                                                                                                                                                                                              0.3s
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl http://localhost:8080/
+{"greeting": "Hello docker compose!", "count": 0, "hostname": "4ba9fc77ff54", "storage": "sqlite"}dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker compose down
+[+] down 2/2
+ ✔ Container app-app-1 Removed                                                                                                                                                                                                                                                                                  3.3s
+ ✔ Network app_default Removed
