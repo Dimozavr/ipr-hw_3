@@ -1,0 +1,29 @@
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker compose up -d --build
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl http://localhost:8080/
+{"greeting": "Hello docker compose!", "count": 0, "hostname": "7804c3c53aa2", "storage": "redis"}
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl http://localhost:8080/readyz
+{"status": "ready", "storage": "redis"}
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl http://localhost:8080/healthyz
+{"status": "alive"}
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl -X POST http://localhost:8080/increment
+{"greeting": "Hello docker compose!", "count": 1, "hostname": "975929a680f8", "storage": "redis"}
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl -X POST http://localhost:8080/increment
+{"greeting": "Hello docker compose!", "count": 2, "hostname": "975929a680f8", "storage": "redis"}
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker compose down
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker compose up -d
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl http:/localhost:8080/
+{"greeting": "Hello docker compose!", "count": 2, "hostname": "975929a680f8", "storage": "redis"}
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker compose stop redis
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl http://localhost:8080/healthz
+{"status": "alive"}
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl http://localhost:8080/readyz
+{"error": "storage_unavailable"}
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl -sS -w '\nHTTP %{http_code}\n' -X POST http://localhost:8080/increment
+{"error": "storage_unavailable"}
+HTTP 503
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker compose start redis
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl http://localhost:8080/
+{"greeting": "Hello docker compose!", "count": 2, "hostname": "975929a680f8", "storage": "redis"}
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl -X POST http://localhost:8080/increment
+{"greeting": "Hello docker compose!", "count": 3, "hostname": "975929a680f8", "storage": "redis"}
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker compose down -v

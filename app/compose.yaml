@@ -6,8 +6,24 @@ services:
     environment:
       PORT: "8000"
       GREETING: "${GREETING}"
-      DATA_FILE: "/data/counter.db"
+      STORAGE: "redis"
+      REDIS_URL: "redis://redis:6379/0"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')"]
+      timeout: 5s
+      interval: 5s
+      retries: 3
+    depends_on:
+      redis:
+        condition: service_healthy
+  redis:
+    image: redis:7.4-alpine
     volumes:
-      - data_counter:/data
+      - data_redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      timeout: 5s
+      interval: 5s
+      retries: 3
 volumes:
-  data_counter:
+  data_redis:
