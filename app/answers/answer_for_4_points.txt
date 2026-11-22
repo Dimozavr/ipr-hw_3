@@ -1,16 +1,15 @@
-dimozavr@dimozavrhuawei:~/CLionProjects/ipr-hw3/app$ curl -X POST http://localhost:8080/increment
-{"greeting": "Hello!", "count": 1, "hostname": "9c29a462b443", "storage": "sqlite"}
-dimozavr@dimozavrhuawei:~/CLionProjects/ipr-hw3/app$ curl http://localhost:8080/
-{"greeting": "Hello!", "count": 1, "hostname": "9c29a462b443", "storage": "sqlite"}
-dimozavr@dimozavrhuawei:~/CLionProjects/ipr-hw3/app$ curl -X POST http://localhost:8080/increment
-{"greeting": "Hello!", "count": 2, "hostname": "9c29a462b443", "storage": "sqlite"}
-dimozavr@dimozavrhuawei:~/CLionProjects/ipr-hw3/app$ curl http://localhost:8080/
-{"greeting": "Hello!", "count": 2, "hostname": "9c29a462b443", "storage": "sqlite"}
-dimozavr@dimozavrhuawei:~/CLionProjects/ipr-hw3/app$ docker logs hw-container
-2026-11-17 11:26:56,944 listening port=8000 storage=sqlite
-2026-11-17 11:29:30,739 http 172.17.0.1 "POST /increment HTTP/1.1" 200 -
-2026-11-17 11:30:01,006 http 172.17.0.1 "GET / HTTP/1.1" 200 -
-2026-11-17 11:30:29,020 http 172.17.0.1 "GET / HTTP/1.1" 200 -
-2026-11-17 11:30:32,413 http 172.17.0.1 "POST /increment HTTP/1.1" 200 -
-2026-11-17 11:30:35,953 http 172.17.0.1 "GET / HTTP/1.1" 200 -
-2026-11-17 11:30:38,657 http 172.17.0.1 "GET / HTTP/1.1" 200 -
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker run -d --name hw_container -p 8080:8000 -e GREETING="Hello!" hw_app
+5a59734e19f6f573bda6e2a5c7c8b0b8741e415f3abc7713748508f7428242b6
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ curl -fsS http://127.0.0.1:8080/
+curl -fsS -X POST http://127.0.0.1:8080/increment
+curl -fsS http://127.0.0.1:8080/readyz
+{"greeting": "Hello!", "count": 0, "hostname": "5a59734e19f6", "storage": "sqlite"}
+{"greeting": "Hello!", "count": 1, "hostname": "5a59734e19f6", "storage": "sqlite"}
+{"status": "ready", "storage": "sqlite"}
+dimozavr@DimozavrLinux:~/CLionProjects/ipr-hw_3/app$ docker logs hw_container
+2026-11-22 18:22:14,419 listening port=8000 storage=sqlite
+2026-11-22 18:22:57,788 http 192.168.65.1 "GET / HTTP/1.1" 200 -
+2026-11-22 18:22:57,864 http 192.168.65.1 "GET /favicon.ico HTTP/1.1" 404 -
+2026-11-22 18:23:14,380 http 192.168.65.1 "GET / HTTP/1.1" 200 -
+2026-11-22 18:23:14,402 http 192.168.65.1 "POST /increment HTTP/1.1" 200 -
+2026-11-22 18:23:14,408 http 192.168.65.1 "GET /readyz HTTP/1.1" 200 -
